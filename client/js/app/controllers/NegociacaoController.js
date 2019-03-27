@@ -9,28 +9,27 @@ class NegociacaoController {
 
 	adiciona(event){
 		event.preventDefault();
-		debugger;
-		let negociacao = this.instanciaNegociacao(this._inputData.value, this._inputQuantidade.value, this._inputValor.value);
-		this.limpaCampos();
-	}
 
-	instanciaNegociacao(data,quant,valor){
 		let date = new Date(
-			...data
+		...this._inputData.value
 			.split('-')
 			.map((item, indice) => item - indice % 2)
 		);	
-		return new Negociacao(
+		let negociacao = new Negociacao(
 			date,
-			quant,
-			valor
+			this._inputQuantidade.value,
+			this._inputValor.value
 		);
+
+		this._limpaCampos();
 	}
 
-	limpaCampos(){
+	_limpaCampos(){
 		this._inputData.value = '';
 		this._inputQuantidade.value = 1;
-		this._inputValor.value = '0,0';
+		this._inputValor.value = '0.0';
+
+		this._inputData.focus();
 	}
 
 }
